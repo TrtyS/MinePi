@@ -7,19 +7,19 @@ I recommend use RPi 4 at least 2GB model, not tested at RPi 3!
 I am woring on a automated script, come back after month :D
 
 ## How to do it
-There is written quicky what I have done to host my Minecraft server, but still recommending to read the links to understand it *(with copying you wont learn anything) use ´man´*.
+There is written quicky what I have done to host my Minecraft server, but still recommending to read the links to understand it *(with copying you wont learn anything) use `man`*.
 There are few steps missing *(creating separate user, raid, optimalization and service)*, I will feature them in the script (and also you can figure out yourself ;D).
 
 **0)** Update + Resize - make sure all packages are current and you use you whole SD Card
-´´´
+```
 sudo apt update
 sudo apt upgrade
 sudo raspi-config
-´´´
-In Advanced Options, click expand filesystem and then reboot with ´sudo reboot´.
+```
+In Advanced Options, click expand filesystem and then reboot with `sudo reboot`.
 
 **1)** Overclock & 64bit RPi - put this on end of the *config.txt*:
-´´´
+```
 # overclock
 over_voltage=6
 arm_freq=2147
@@ -27,35 +27,35 @@ gpu_freq=750
 
 # 64bit kernel
 arm_64bit=1
-´´´
+```
 
 **2)** Installing Software - we need git and java:
 I figured out that openjdk 8 *(java 8)* **not work** on 64bit kernel, and openjdk 11 *(java 11)*, **wont generate files when spigot loaded**. For this reason,
 we will use openjdk 10 *(java 10)*(we will be installing only jre package, because we need only Java Runtime Enviroment ;D).
 
-´´´
+```
 sudo apt install git
 sudo apt install openjdk-10-jre
-´´´
+```
 
 **3)** Building Spigot - its minecraft server, but better
 Download BuildTools from Spigot and compile them (you can specifiy versoin, more on website).
-´´´
+```
 wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 java -jar BuildTools.jar --rev latest
-´´´
+```
 Then you can remove BuildTools and run your server. You have to accept eula (edit eula.txt and rewrite false to true):
-´´´
+```
 rm BuildTools.jar
 java -jar server_version.jar
 
 nano eula.txt
-´´´
+```
 Now you can start your minecraft server and allocate with more RAM (I allocated 3GB on my 4GB model):
-´´´
+```
 java -jar -Xms3G -Xmx3G server_version.jar nogui
-´´´
-Now your Minecraft server sucessfuly running on Raspberry Pi and if you have it in your network, you can acess it on ´raspberrypi.local´ on port *25565*.
+```
+Your Minecraft server sucessfuly running on Raspberry Pi and if you have it in your network, you can acess it on `raspberrypi.local` on port *25565*.
 
 # Links
 There Are Articles When you can read, what you need. Try to figure it out :D
